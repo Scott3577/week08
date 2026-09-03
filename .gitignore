@@ -197,3 +197,10 @@ cython_debug/
 .cursorindexingignore
 
 node_modules/
+# Terraform (local infra provisioning — never commit state, plans, vars, or provider binaries)
+terraform/.terraform/
+terraform/*.tfstate
+terraform/*.tfstate.*
+terraform/*.tfvars
+terraform/tfplan
+terraform/tfplan.*
