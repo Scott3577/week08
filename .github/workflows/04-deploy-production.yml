@@ -149,3 +149,10 @@ jobs:
           kubectl get pods -n production
           kubectl get services -n production
           kubectl get pvc -n production
+      - name: Validate monitoring stack
+        run: |
+          echo "Checking Prometheus and Grafana pods in the monitoring namespace..."
+          kubectl get pods -n monitoring
+          kubectl wait --for=condition=Ready pod -l app.kubernetes.io/name=grafana -n monitoring --timeout=120s
+          kubectl wait --for=condition=Ready pod -l app.kubernetes.io/name=prometheus -n monitoring --timeout=120s
+          echo "Monitoring stack is healthy."
